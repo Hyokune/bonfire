@@ -1,0 +1,38 @@
+name: Post Push Checks
+
+on:
+  push:
+    paths:
+      - '**/*.tsx?'
+      - '**/*.json'
+      - '**/*.yaml'
+      - '.github/workflows/check-post-push.yml'
+      - '.eslintrc.js'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set sha7 env variable
+        run: echo "SHA7=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+
+      - name: Use Node.js v12.13.0
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12.13.0'
+          cache: 'npm'
+
+      - name: Install top level deps for linting
+        run: npm install
+        working-directory: .
+
+      - name: Run lint check
+        run: npm run lint
+        working-directory: .
+
+      - name: Run build
+        run: npm run build
+        working-directory: .
