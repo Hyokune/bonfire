@@ -1,16 +1,24 @@
 import { app, BrowserWindow } from 'electron';
 import isDev from 'electron-is-dev';
 
-const createWindow = (): void => {
-  let win = new BrowserWindow({
-    width: 800,
-    height: 600,
+app.on('ready', () => {
+  const win = new BrowserWindow({
+    width: 1580,
+    height: 720,
     webPreferences: {
-      nodeIntegration: true,
+      devTools: true,
     },
   });
 
-  win.loadURL(isDev ? 'http://localhost:3000' : `file://${app.getAppPath()}/index.html`);
-};
+  console.log('IS DEV: ', isDev);
 
-app.on('ready', createWindow);
+  win.loadURL(isDev ? 'http://localhost:3000' : `file://${app.getAppPath()}/index.html`);
+});
+
+app.on('window-all-closed', () => {
+  // Respect the OSX convention of having the application in memory even
+  // after all windows have been closed
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});

@@ -3,14 +3,13 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/renderer.tsx',
-  target: 'electron-renderer',
+  entry: './src/index.tsx',
+  target: ['web', 'electron-renderer'],
   devtool: 'source-map',
   devServer: {
     static: {
-      directory: path.join(__dirname, "'dist/renderer.js")
+      directory: path.join(__dirname, 'dist/index.js'),
     },
-    // contentBase: path.join(__dirname, 'dist/renderer.js'),
     compress: true,
     port: 3000,
   },
@@ -27,19 +26,15 @@ module.exports = {
         include: /src/,
         use: [{ loader: 'ts-loader' }],
       },
-      {
-        test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
     ],
   },
   output: {
     path: __dirname + '/dist',
-    filename: 'renderer.js',
+    filename: 'index.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './public/index.html',
     }),
   ],
 };
