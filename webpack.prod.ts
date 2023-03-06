@@ -8,4 +8,7 @@ const config: Configuration = {
   mode: 'production',
 };
 
-export default merge<Configuration>(electronConfig, reactConfig, config);
+export default [
+  merge<Configuration>(config, electronConfig),
+  merge<Configuration>(config, reactConfig),
+];

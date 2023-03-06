@@ -2,7 +2,7 @@
   "name": "bonfire",
   "version": "1.0.0",
   "description": "A Dark Souls tool to help backup saves",
-  "main": "dist/index.js",
+  "main": "dist/main.js",
   "scripts": {
     "build": "webpack --config webpack.prod.ts",
     "react:dev": "webpack serve --config webpack.react.dev.ts",
