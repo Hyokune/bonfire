@@ -9,7 +9,8 @@
     "electron:dev": "nodemon",
     "dev": "concurrently --kill-others \"npm run react:dev\" \"npm run electron:dev\"",
     "start": "npm run build && electron dist/main.js",
-    "lint": "eslint --parser-options project:tsconfig.json --ext ts,js src"
+    "lint": "eslint --parser-options project:tsconfig.json --ext ts,js src",
+    "typeCheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
