@@ -1,18 +1,36 @@
 import { app, BrowserWindow } from 'electron';
-import isDev from 'electron-is-dev';
+import path from 'path';
 
-app.on('ready', () => {
+const getWindowHref = () => {
+  let url;
+
+  console.log('NODE_ENV: ', process.env.NODE_ENV);
+
+  if (process.env.NODE_ENV === 'production') {
+    url = new URL(path.join(__dirname, 'index.html'), 'file://');
+  } else {
+    url = new URL('http://localhost:3000');
+  }
+
+  return url.href;
+};
+
+const openMainWindow = () => {
   const win = new BrowserWindow({
     width: 1580,
     height: 720,
     webPreferences: {
       devTools: true,
     },
+    autoHideMenuBar: true,
   });
 
-  console.log('IS DEV: ', isDev);
+  const href = getWindowHref();
+  win.loadURL(href);
+};
 
-  win.loadURL(isDev ? 'http://localhost:3000' : `file://${app.getAppPath()}/index.html`);
+app.on('ready', () => {
+  openMainWindow();
 });
 
 app.on('window-all-closed', () => {

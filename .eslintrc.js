@@ -20,6 +20,8 @@ module.exports = {
         js: 'never',
         mjs: 'never',
         ts: 'never',
+        jsx: 'never',
+        tsx: 'never',
       },
     ],
     'import/no-named-as-default': 0,
