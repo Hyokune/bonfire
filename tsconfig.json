@@ -17,5 +17,10 @@
     "target": "ES2022"
   },
   "include": ["./src/"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

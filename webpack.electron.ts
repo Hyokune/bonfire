@@ -1,7 +1,7 @@
 import path from 'path';
-import webpack from 'webpack';
+import { Configuration } from 'webpack';
 
-const electronConfig: webpack.Configuration = {
+const electronConfig: Configuration = {
   entry: './src/main.ts',
   target: 'electron-main',
   resolve: {

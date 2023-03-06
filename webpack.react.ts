@@ -1,9 +1,9 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
-import webpack from 'webpack';
+import { Configuration } from 'webpack';
 import 'webpack-dev-server';
 
-const reactConfig: webpack.Configuration = {
+const reactConfig: Configuration = {
   entry: './src/index.tsx',
   devtool: 'source-map',
   devServer: {
