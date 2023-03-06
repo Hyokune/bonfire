@@ -25,12 +25,6 @@ module.exports = {
     'import/no-named-as-default': 0,
     'import/no-self-import': 0,
     'import/prefer-default-export': 0,
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: ['**/*.test.ts', '**/*.test.js', '**/*.ts'],
-      },
-    ],
     'no-mixed-operators': 1,
     'no-param-reassign': 1,
     'no-underscore-dangle': 0,

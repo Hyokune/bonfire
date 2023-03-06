@@ -1,9 +1,7 @@
-const path = require('path');
+import path from 'path';
+import webpack from 'webpack';
 
-module.exports = {
-  // Build Mode
-  mode: 'development',
-  // Electron Entrypoint
+const electronConfig: webpack.Configuration = {
   entry: './src/main.ts',
   target: 'electron-main',
   resolve: {
@@ -26,3 +24,5 @@ module.exports = {
     filename: 'main.js',
   },
 };
+
+export default electronConfig;

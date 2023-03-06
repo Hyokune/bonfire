@@ -5,8 +5,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
-    "lib": ["es2021", "DOM", "DOM.Iterable"],
-    "module": "commonjs",
+    "lib": ["ES2022", "DOM"],
+    "module": "ES2022",
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -14,7 +14,8 @@
     "sourceMap": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2021"
+    "target": "ES2022"
   },
+  "include": ["./src/"],
   "exclude": ["node_modules"]
 }

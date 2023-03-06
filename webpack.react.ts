@@ -1,10 +1,10 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
+import webpack from 'webpack';
+import 'webpack-dev-server';
 
-module.exports = {
-  mode: 'development',
+const reactConfig: webpack.Configuration = {
   entry: './src/index.tsx',
-  target: ['web', 'electron-renderer'],
   devtool: 'source-map',
   devServer: {
     static: {
@@ -38,3 +38,5 @@ module.exports = {
     }),
   ],
 };
+
+export default reactConfig;
