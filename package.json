@@ -2,21 +2,47 @@
   "name": "bonfire",
   "version": "1.0.0",
   "description": "A Dark Souls tool to help backup saves",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.ts",
     "react:dev": "webpack serve --config webpack.react.dev.ts",
     "electron:dev": "nodemon",
     "dev": "concurrently --kill-others \"npm run react:dev\" \"npm run electron:dev\"",
     "start": "npm run build && electron dist/main.js",
+    "package": "npm run build && electron-builder build --publish never",
     "lint": "eslint --parser-options project:tsconfig.json --ext ts,js src",
     "typeCheck": "tsc --noEmit"
+  },
+  "build": {
+    "productName": "Bonfire",
+    "appId": "com.bonfire.app",
+    "win": {
+      "target": [
+        "portable"
+      ]
+    },
+    "extends": null,
+    "files": [
+      "dist",
+      "package.json",
+      "node_modules"
+    ],
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "output": "build"
+    }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hyokune/bonfire.git"
   },
-  "author": "Hyokune",
+  "author": {
+    "name": "Lance Lee",
+    "url": "https://github.com/Hyokune"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Hyokune/bonfire/issues"
@@ -30,6 +56,7 @@
     "@typescript-eslint/parser": "5.51.0",
     "concurrently": "7.6.0",
     "electron": "23.1.2",
+    "electron-builder": "24.0.0",
     "electron-is-dev": "2.0.0",
     "eslint": "8.34.0",
     "eslint-config-airbnb": "19.0.4",
