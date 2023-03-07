@@ -3,7 +3,7 @@ import { Configuration } from 'webpack';
 import 'webpack-dev-server';
 import { merge } from 'webpack-merge';
 
-import electronConfig from './webpack.electron';
+import { electronConfig, preloadConfig } from './webpack.electron';
 
 const config: Configuration = {
   mode: 'development',
@@ -15,4 +15,7 @@ const config: Configuration = {
   },
 };
 
-export default merge<Configuration>(electronConfig, config);
+export default [
+  merge<Configuration>(config, preloadConfig),
+  merge<Configuration>(config, electronConfig),
+];
