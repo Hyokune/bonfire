@@ -1,10 +1,10 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import path from 'path';
+
+let browserWindow: BrowserWindow;
 
 const getWindowHref = () => {
   let url;
-
-  console.log('NODE_ENV: ', process.env.NODE_ENV);
 
   if (process.env.NODE_ENV === 'production') {
     url = new URL(path.join(__dirname, 'index.html'), 'file://');
@@ -15,21 +15,35 @@ const getWindowHref = () => {
   return url.href;
 };
 
+async function handleDirectoryOpen() {
+  const { canceled, filePaths } = await dialog.showOpenDialog(browserWindow, {
+    properties: ['openDirectory'],
+  });
+
+  if (canceled) {
+    return;
+  } else {
+    return filePaths[0];
+  }
+}
+
 const openMainWindow = () => {
-  const win = new BrowserWindow({
+  browserWindow = new BrowserWindow({
     width: 1580,
     height: 720,
     webPreferences: {
       devTools: true,
+      preload: path.join(__dirname, './preload.js'),
     },
     autoHideMenuBar: true,
   });
 
   const href = getWindowHref();
-  win.loadURL(href);
+  browserWindow.loadURL(href);
 };
 
 app.on('ready', () => {
+  ipcMain.handle('dialog:openDirectory', handleDirectoryOpen);
   openMainWindow();
 });
 

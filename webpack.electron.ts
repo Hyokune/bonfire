@@ -1,9 +1,7 @@
 import path from 'path';
 import { Configuration } from 'webpack';
 
-const electronConfig: Configuration = {
-  entry: './src/main.ts',
-  target: 'electron-main',
+const commonConfig: Configuration = {
   resolve: {
     alias: {
       ['@']: path.resolve(__dirname, 'src'),
@@ -19,10 +17,24 @@ const electronConfig: Configuration = {
       },
     ],
   },
+};
+
+export const electronConfig: Configuration = {
+  ...commonConfig,
+  entry: './src/main.ts',
+  target: 'electron-main',
   output: {
     path: __dirname + '/dist',
     filename: 'main.js',
   },
 };
 
-export default electronConfig;
+export const preloadConfig: Configuration = {
+  ...commonConfig,
+  entry: './src/preload.ts',
+  target: 'electron-preload',
+  output: {
+    path: __dirname + '/dist',
+    filename: 'preload.js',
+  },
+};
